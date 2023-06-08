@@ -8,33 +8,32 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
-    private fun discriminant(a: Double, b: Double, c: Double) = (Math.sqrt(b) - 4 * a * c).toInt()
+    private fun discriminant(a: Double, b: Double, c: Double) = (Math.pow(b, 2.0) - 4 * a * c)
 
     private fun round(a:Double) : Double{
         val roundoff = (a * 100.0).roundToInt() / 100.0
         return roundoff
     }
-
     private fun Equation(a: Double, b: Double, c: Double): String {
         val discriminant = discriminant(a, b, c)
         if (a!==0.0){
             if (discriminant > 0) {
                 val root1 = round((-b + Math.sqrt(discriminant.toDouble())) / (2 * a))
                 val root2 = round((-b - Math.sqrt(discriminant.toDouble())) / (2 * a))
-                return "Дискриминант D > 0, следовательно уравнение имеет два действительных корня: \nx1= $root1 \nx2= $root2"
+                return "D > 0 \nx1= $root1 \nx2= $root2"
             }
-            else if (discriminant== 0) {
+            else if (discriminant == 0.0) {
                 val root2 = round(-b / (2 * a))
-                return "Дискриминант D = 0, следовательно уравнение имеет один действительный корень: \nx1=x2=$root2"
+                return "D = 0 \nx1=x2=$root2"
             }
             else{
-                return "Дискриминант D < 0, следовательно уравнение не имеет действительных корней"
+                return "D < 0 \nУравнение не имеет действительных корней"
             }
         }
         else if(c!=0.0 && b!=0.0)
         {
             val root= round(-c / b)
-            return "Данное уравнение является линейным \nСледовательно оно имеет один корень x=$root"
+            return "Данное уравнение является линейным \nx=$root"
         }
         else if(a==0.0 && c==0.0 && b==0.0)
         {
